@@ -4,9 +4,10 @@ import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 import { getAnalytics, isSupported } from 'firebase/analytics';
 
+const globalProc = typeof globalThis !== 'undefined' ? (globalThis as any).process : undefined;
 const env = (typeof import.meta !== 'undefined' && import.meta.env) 
   ? import.meta.env 
-  : (typeof process !== 'undefined' && process.env ? process.env : {}) as any;
+  : (globalProc?.env || {}) as any;
 
 const firebaseConfig = {
   apiKey: env.VITE_FIREBASE_API_KEY || 'demo-api-key',

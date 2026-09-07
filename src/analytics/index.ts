@@ -1,6 +1,8 @@
 import { analytics } from '../services/firebase/config';
 import { logEvent } from 'firebase/analytics';
 
+const globalProc = typeof globalThis !== 'undefined' ? (globalThis as any).process : undefined;
+
 export function trackAnalyticsEvent(eventName: string, params: Record<string, any> = {}) {
   // Sanitize: Do not send phone numbers or sensitive PII to analytics (Section 33 requirement)
   const safeParams = { ...params };
@@ -17,8 +19,10 @@ export function trackAnalyticsEvent(eventName: string, params: Record<string, an
   }
 
   // Also log to console in development
-  const isDev = (typeof import.meta !== 'undefined' && import.meta.env?.DEV) || 
-                (typeof process !== 'undefined' && process.env?.NODE_ENV === 'development');
+  const isDev = Boolean(
+    (typeof import.meta !== 'undefined' && import.meta.env?.DEV) || 
+    (globalProc?.env?.NODE_ENV === 'development')
+  );
   if (isDev) {
     console.debug(`[Analytics: ${eventName}]`, safeParams);
   }

@@ -123,6 +123,7 @@ async function runDomainTestSuite() {
       process.exitCode = 1;
     }
     console.log('=============================================\n');
+    process.exit(failures === 0 ? 0 : 1);
   } catch (err) {
     console.error('Fatal error during test execution:', err);
     process.exitCode = 1;
