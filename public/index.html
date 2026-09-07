@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#FBF9F5">
+  <title>Puja Look — Maa Tara Bastralaya, Gariahat</title>
+  
+  <!-- Google Fonts: Cormorant Garamond (refined boutique serif) + Plus Jakarta Sans (crisp sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS via CDN with custom boutique theme -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            warm: '#FBF9F5',
+            cream: '#F4EFE6',
+            creamDark: '#EAE2D5',
+            line: '#E5DDD0',
+            ink: '#1D211E',
+            muted: '#6E736A',
+            terracotta: '#C85A32',
+            terracottaDark: '#AC4823',
+            templeGreen: '#2A4B3C',
+            templeGreenDark: '#1E372B',
+            gold: '#C89D52',
+            goldLight: '#FDF7EB',
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"DM Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="bg-warm text-ink font-sans antialiased min-h-screen selection:bg-terracotta selection:text-white pb-16">
+
+  <!-- Outer Mobile-First Container -->
+  <div class="max-w-[480px] mx-auto min-h-screen bg-warm border-x border-line/60 shadow-sm relative flex flex-col">
+    
+    <!-- TOP NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 bg-warm/95 backdrop-blur-md border-b border-line px-5 py-3 flex items-center justify-between">
+      <!-- Store Identity -->
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-templeGreen text-warm flex items-center justify-center font-serif text-base font-bold shadow-sm">
+          PL
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <h1 class="text-xs font-bold uppercase tracking-wider text-ink" id="navStoreName">Maa Tara Bastralaya</h1>
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+          </div>
+          <p class="text-[10px] text-muted font-medium" id="navStoreLocation">Gariahat, Kolkata</p>
+        </div>
+      </div>
+
+      <!-- Controls: Language Toggle & Mode Switch -->
+      <div class="flex items-center gap-2">
+        <button id="langToggleBtn" class="px-2.5 py-1 rounded-full border border-line bg-cream hover:bg-creamDark text-[11px] font-semibold text-ink transition-colors flex items-center gap-1">
+          <span id="langLabelEn" class="text-terracotta font-bold">EN</span>
+          <span class="text-muted/60">/</span>
+          <span id="langLabelBn" class="text-muted">বাংলা</span>
+        </button>
+        <button id="staffToggleBtn" class="p-1.5 text-muted hover:text-ink rounded-md transition-colors" title="Staff Mode">
+          <i data-lucide="store" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- STEP PROGRESS BAR (Visible during Discovery Flow) -->
+    <div id="flowProgressBar" class="h-1 bg-line w-full hidden">
+      <div id="flowProgressFill" class="h-full bg-terracotta transition-all duration-300 w-0"></div>
+    </div>
+
+    <!-- MAIN APP SCREENS CONTAINER -->
+    <main class="flex-1 flex flex-col p-5">
+
+      <!-- ===================================================== -->
+      <!-- SCREEN 1: SHOP LANDING -->
+      <!-- ===================================================== -->
+      <section id="screenLanding" class="screen-view flex-1 flex flex-col justify-between animate-fadeIn">
+        <div class="pt-6 pb-4">
+          <!-- Festive Eyebrow -->
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-goldLight border border-gold/40 text-gold text-xs font-semibold uppercase tracking-widest mb-5">
+            <span>✦</span> <span id="landingEyebrow">Pujo Festive Collection 2024</span>
+          </div>
+
+          <!-- Hero Headline -->
+          <h2 class="font-serif text-4xl sm:text-5xl leading-[1.05] text-ink font-semibold tracking-tight" id="landingTitle">
+            Find your <br><em class="text-terracotta font-normal italic">Pujor look.</em>
+          </h2>
+
+          <p class="mt-4 text-sm sm:text-base text-muted leading-relaxed max-w-[380px]" id="landingSubtitle">
+            Tell us what you're looking for. We'll help you find something you'll love from our racks right now.
+          </p>
+
+          <!-- Store Trust Anchor -->
+          <div class="mt-8 p-3.5 rounded-xl bg-cream border border-line flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-warm border border-line flex items-center justify-center text-templeGreen shrink-0">
+              <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-xs font-semibold text-ink" id="landingTrustTitle">Actual In-Store Stock</p>
+              <p class="text-[11px] text-muted leading-tight" id="landingTrustSub">Every recommendation is hanging on the racks at Gariahat today.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Look Preview Strip -->
+        <div class="my-6 grid grid-cols-3 gap-2.5">
+          <div class="aspect-[3/4] rounded-lg overflow-hidden border border-line bg-cream">
+            <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=400&q=80" alt="Silk Saree" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[3/4] rounded-lg overflow-hidden border border-line bg-cream">
+            <img src="https://images.unsplash.com/photo-1603252110481-7ba873bf42ab?auto=format&fit=crop&w=400&q=80" alt="Jamdani Panjabi" class="w-full h-full object-cover">
+          </div>
+          <div class="aspect-[3/4] rounded-lg overflow-hidden border border-line bg-cream">
+            <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=400&q=80" alt="Baluchari Kurta Set" class="w-full h-full object-cover">
+          </div>
+        </div>
+
+        <!-- Landing Action CTAs -->
+        <div class="space-y-3 pt-4">
+          <button id="startDiscoveryBtn" class="w-full py-4 px-6 rounded-xl bg-terracotta hover:bg-terracottaDark text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-[0.98]">
+            <span id="startDiscoveryText">Find My Puja Look</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+          
+          <button id="browseAllBtn" class="w-full py-3.5 px-6 rounded-xl bg-cream hover:bg-creamDark border border-line text-ink font-semibold text-xs flex items-center justify-center gap-2 transition-colors">
+            <i data-lucide="grid" class="w-3.5 h-3.5 text-muted"></i>
+            <span id="browseAllText">Browse Complete Collection</span>
+          </button>
+        </div>
+      </section>
+
+
+      <!-- ===================================================== -->
+      <!-- SCREEN 2: SHOPPING INTENT -->
+      <!-- ===================================================== -->
+      <section id="screenIntent" class="screen-view flex-1 flex flex-col justify-between hidden animate-fadeIn">
+        <div>
+          <!-- Header with Back -->
+          <div class="flex items-center justify-between mb-4">
+            <button class="back-to-screen text-xs font-semibold text-muted flex items-center gap-1 hover:text-ink" data-target="screenLanding">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i>
+              <span class="back-text">Back</span>
+            </button>
+            <span class="text-[11px] font-mono text-muted">STEP 1 / 2</span>
+          </div>
+
+          <h2 class="font-serif text-3xl sm:text-4xl text-ink font-semibold" id="intentHeading">
+            What are you <br><em class="text-terracotta font-normal italic">shopping for?</em>
+          </h2>
+          <p class="text-xs text-muted mt-1.5" id="intentSubtitle">Select the primary occasion for your outfit.</p>
+
+          <!-- Intent Selection Options (Large tap targets) -->
+          <div class="mt-6 space-y-2.5" id="intentOptionsContainer">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Continue CTA -->
+        <div class="pt-6">
+          <button id="intentContinueBtn" disabled class="w-full py-4 px-6 rounded-xl bg-terracotta hover:bg-terracottaDark disabled:opacity-40 disabled:pointer-events-none text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-sm transition-all">
+            <span id="intentContinueText">Continue</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </section>
+
+
+      <!-- ===================================================== -->
+      <!-- SCREEN 3: PREFERENCES -->
+      <!-- ===================================================== -->
+      <section id="screenPreferences" class="screen-view flex-1 flex flex-col justify-between hidden animate-fadeIn">
+        <div>
+          <!-- Header with Back -->
+          <div class="flex items-center justify-between mb-4">
+            <button class="back-to-screen text-xs font-semibold text-muted flex items-center gap-1 hover:text-ink" data-target="screenIntent">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i>
+              <span class="back-text">Back</span>
+            </button>
+            <span class="text-[11px] font-mono text-muted">STEP 2 / 2</span>
+          </div>
+
+          <h2 class="font-serif text-3xl sm:text-4xl text-ink font-semibold" id="prefHeading">
+            Your fit & <br><em class="text-terracotta font-normal italic">budget.</em>
+          </h2>
+          <p class="text-xs text-muted mt-1.5" id="prefSubtitle">Minimum details to pinpoint exact matches on the racks.</p>
+
+          <!-- Preference Questions Container -->
+          <div class="mt-6 space-y-5">
+            
+            <!-- Question 1: Budget -->
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-ink mb-2" id="prefBudgetLabel">Budget</label>
+              <div class="grid grid-cols-2 gap-2" id="budgetChipsContainer">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Question 2: Style -->
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-ink mb-2" id="prefStyleLabel">Style Aesthetic</label>
+              <div class="grid grid-cols-2 gap-2" id="styleChipsContainer">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Question 3: Colour Tone -->
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-ink mb-2" id="prefColourLabel">Colour</label>
+              <div class="grid grid-cols-2 gap-2" id="colourChipsContainer">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Question 4: Size -->
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-ink mb-2" id="prefSizeLabel">Size</label>
+              <div class="grid grid-cols-5 gap-1.5" id="sizeChipsContainer">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Find My Look Action Button -->
+        <div class="pt-6">
+          <button id="findMatchesBtn" class="w-full py-4 px-6 rounded-xl bg-terracotta hover:bg-terracottaDark text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-sm transition-all active:scale-[0.98]">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            <span id="findMatchesText">Find My Look</span>
+          </button>
+        </div>
+      </section>
+
+
+      <!-- ===================================================== -->
+      <!-- SCREEN 4: AI RECOMMENDATIONS -->
+      <!-- ===================================================== -->
+      <section id="screenRecommendations" class="screen-view flex-1 flex flex-col hidden animate-fadeIn">
+        <!-- Top bar with Adjust Preferences -->
+        <div class="flex items-center justify-between mb-4">
+          <button class="back-to-screen text-xs font-semibold text-muted flex items-center gap-1 hover:text-ink" data-target="screenPreferences">
+            <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5"></i>
+            <span id="adjustFiltersText">Adjust Preferences</span>
+          </button>
+          <span class="text-[11px] font-mono text-templeGreen font-bold bg-templeGreen/10 px-2.5 py-0.5 rounded-full" id="candidateCountTag">In-Store Matches</span>
+        </div>
+
+        <h2 class="font-serif text-3xl sm:text-4xl text-ink font-semibold" id="recsHeading">
+          Your Puja <em class="text-terracotta font-normal italic">shortlist</em>
+        </h2>
+        <p class="text-xs text-muted mt-1" id="recsSubtitle">
+          We found a few looks that match your preferences from our racks.
+        </p>
+
+        <!-- Loading State -->
+        <div id="recsLoading" class="py-16 text-center space-y-4 hidden">
+          <div class="inline-block w-8 h-8 border-2 border-terracotta border-t-transparent rounded-full animate-spin"></div>
+          <p class="text-xs text-muted font-medium" id="recsLoadingText">Checking Maa Tara Bastralaya rack inventory...</p>
+        </div>
+
+        <!-- Fewer Matches Note Notice -->
+        <div id="recsNoteBanner" class="mt-4 p-3 rounded-lg bg-goldLight border border-gold/40 text-xs text-ink/80 flex items-start gap-2.5 hidden">
+          <i data-lucide="info" class="w-4 h-4 text-gold shrink-0 mt-0.5"></i>
+          <span id="recsNoteText">We found fewer matches. Try adjusting your preferences.</span>
+        </div>
+
+        <!-- 3 Recommended Product Cards Container -->
+        <div id="recsListContainer" class="mt-5 space-y-5 pb-6">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- Bottom Fallback CTA -->
+        <div class="pt-2 text-center">
+          <button id="restartFlowBtn" class="text-xs text-muted hover:text-ink underline">Start with a different occasion</button>
+        </div>
+      </section>
+
+
+      <!-- ===================================================== -->
+      <!-- SCREEN 5: PRODUCT DETAIL -->
+      <!-- ===================================================== -->
+      <section id="screenProductDetail" class="screen-view flex-1 flex flex-col hidden animate-fadeIn">
+        <!-- Back Navigation -->
+        <div class="mb-3">
+          <button id="backToRecsBtn" class="text-xs font-semibold text-muted flex items-center gap-1 hover:text-ink">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            <span id="backToRecsText">Back to Recommendations</span>
+          </button>
+        </div>
+
+        <!-- Large Product Image -->
+        <div class="w-full aspect-[4/5] rounded-2xl overflow-hidden bg-cream border border-line relative shadow-sm">
+          <img id="detailImage" src="" alt="Product" class="w-full h-full object-cover">
+          <span class="absolute top-3 left-3 bg-warm/95 backdrop-blur-sm border border-line text-[10px] font-mono px-2.5 py-1 rounded-md text-ink uppercase tracking-wider" id="detailCategory">
+            Category
+          </span>
+          <span class="absolute bottom-3 left-3 bg-templeGreen text-white text-[10px] font-semibold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+            <span id="detailStockStatus">Available on Rack</span>
+          </span>
+        </div>
+
+        <!-- Product Information Block -->
+        <div class="mt-4 space-y-4">
+          <div>
+            <p class="text-xs font-medium text-muted" id="detailStoreNotice">Maa Tara Bastralaya, Gariahat</p>
+            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-ink leading-tight mt-0.5" id="detailName">
+              Product Title
+            </h2>
+          </div>
+
+          <!-- Final Price (Explicit requirement: Final price: ₹X,XXX) -->
+          <div class="p-3 rounded-xl bg-cream border border-line flex items-baseline justify-between">
+            <span class="text-xs font-semibold text-muted uppercase tracking-wider" id="finalPriceLabel">Final price</span>
+            <span class="text-xl font-bold font-mono text-terracotta" id="detailFinalPrice">₹2,499</span>
+          </div>
+
+          <!-- Why it matches reminder -->
+          <div class="p-3 rounded-xl bg-goldLight border border-gold/40 text-xs text-ink/80 flex items-start gap-2">
+            <i data-lucide="sparkles" class="w-4 h-4 text-gold shrink-0 mt-0.5"></i>
+            <p class="text-xs leading-relaxed" id="detailMatchReason">Fits your budget and traditional style preference.</p>
+          </div>
+
+          <!-- Available Sizes selector -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-ink mb-2" id="detailSizeLabel">Select Size for Trial</label>
+            <div class="flex flex-wrap gap-2" id="detailSizesContainer">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Available Colours selector -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-ink mb-2" id="detailColourLabel">Available Colours</label>
+            <div class="flex flex-wrap gap-2" id="detailColoursContainer">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="pt-2 border-t border-line">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-muted mb-1.5" id="detailDescLabel">About this Piece</h4>
+            <p class="text-xs text-ink/80 leading-relaxed" id="detailDescription">
+              Product description here.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sticky Counter Reservation Action -->
+        <div class="sticky bottom-0 bg-warm/95 backdrop-blur-md pt-4 pb-2 border-t border-line mt-6">
+          <button id="openReservationModalBtn" class="w-full py-4 px-6 rounded-xl bg-terracotta hover:bg-terracottaDark text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-md transition-all active:scale-[0.98]">
+            <i data-lucide="bookmark-check" class="w-4 h-4"></i>
+            <span id="reserveAtCounterBtnText">Reserve at Counter</span>
+          </button>
+        </div>
+      </section>
+
+
+      <!-- ===================================================== -->
+      <!-- SCREEN 6: RESERVATION MODAL / SCREEN -->
+      <!-- ===================================================== -->
+      <section id="screenReservation" class="screen-view flex-1 flex flex-col justify-between hidden animate-fadeIn">
+        <div>
+          <!-- Header with Back -->
+          <div class="flex items-center justify-between mb-4">
+            <button class="back-to-screen text-xs font-semibold text-muted flex items-center gap-1 hover:text-ink" data-target="screenProductDetail">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i>
+              <span class="back-text">Back to Look</span>
+            </button>
+            <span class="text-[11px] font-mono text-templeGreen font-bold bg-templeGreen/10 px-2 py-0.5 rounded">COUNTER HOLD</span>
+          </div>
+
+          <h2 class="font-serif text-3xl sm:text-4xl text-ink font-semibold" id="reserveHeading">
+            Reserve this <br><em class="text-terracotta font-normal italic">look.</em>
+          </h2>
+          <p class="text-xs text-muted mt-1.5" id="reserveSubtitle">
+            Staff will pull this item and have it ready for your trial. No advance payment needed.
+          </p>
+
+          <!-- Look Summary Box -->
+          <div class="mt-5 p-3.5 rounded-xl bg-cream border border-line flex items-center gap-3.5">
+            <div class="w-14 h-16 rounded-lg overflow-hidden border border-line shrink-0 bg-warm">
+              <img id="resSummaryImg" src="" alt="Look" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-1 min-w-0">
+              <h4 class="text-xs font-bold text-ink truncate" id="resSummaryTitle">Product Name</h4>
+              <p class="text-[11px] text-muted mt-0.5">
+                <span id="resSummarySize">Size M</span> • <span id="resSummaryColour">Crimson Red</span>
+              </p>
+              <p class="text-xs font-bold font-mono text-terracotta mt-1" id="resSummaryPrice">₹2,499</p>
+            </div>
+          </div>
+
+          <!-- Customer Input Form -->
+          <div class="mt-6 space-y-4">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-ink mb-1.5" id="resNameLabel">Your Name</label>
+              <input type="text" id="resCustomerName" placeholder="e.g. Subir Roy" class="w-full px-3.5 py-3 rounded-xl border border-line bg-warm focus:border-terracotta focus:ring-1 focus:ring-terracotta outline-none text-sm text-ink placeholder:text-muted/60 transition-all">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-ink mb-1.5" id="resPhoneLabel">Mobile Number</label>
+              <div class="relative">
+                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-mono text-muted font-medium">+91</span>
+                <input type="tel" id="resCustomerPhone" maxlength="10" placeholder="9830012345" class="w-full pl-12 pr-3.5 py-3 rounded-xl border border-line bg-warm focus:border-terracotta focus:ring-1 focus:ring-terracotta outline-none text-sm font-mono text-ink placeholder:text-muted/60 transition-all">
+              </div>
+              <p class="text-[10px] text-muted mt-1.5" id="resPhoneHint">We only use this to identify your reservation at the counter.</p>
+            </div>
+
+            <!-- Error Banner -->
+            <div id="resErrorBanner" class="p-3 rounded-lg bg-red-50 border border-red-200 text-xs text-red-700 hidden">
+              <!-- Error message -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirmation CTA -->
+        <div class="pt-6">
+          <button id="submitReservationBtn" class="w-full py-4 px-6 rounded-xl bg-terracotta hover:bg-terracottaDark text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-sm transition-all active:scale-[0.98]">
+            <span id="confirmResBtnText">Confirm Reservation</span>
+            <i data-lucide="check" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </section>
+
+
+      <!-- ===================================================== -->
+      <!-- SCREEN 7: RESERVATION CONFIRMATION -->
+      <!-- ===================================================== -->
+      <section id="screenConfirmation" class="screen-view flex-1 flex flex-col justify-between hidden animate-fadeIn">
+        <div>
+          <!-- Success Indicator -->
+          <div class="w-12 h-12 rounded-full bg-templeGreen/10 border border-templeGreen/20 text-templeGreen flex items-center justify-center mb-4">
+            <i data-lucide="check-circle-2" class="w-6 h-6 text-templeGreen"></i>
+          </div>
+
+          <h2 class="font-serif text-3xl sm:text-4xl text-ink font-semibold" id="confHeading">
+            Your item is <em class="text-terracotta font-normal italic">reserved.</em>
+          </h2>
+          <p class="text-xs text-muted mt-1" id="confSubtitle">
+            Show this reservation ID at the counter to try on your selected piece.
+          </p>
+
+          <!-- Reservation Card -->
+          <div class="mt-6 p-4 rounded-2xl bg-ink text-warm relative overflow-hidden shadow-md">
+            <div class="flex items-center justify-between pb-3 border-b border-warm/15">
+              <div>
+                <p class="text-[10px] font-mono text-warm/60 uppercase tracking-wider" id="confStoreName">Maa Tara Bastralaya</p>
+                <p class="text-xs text-warm font-medium" id="confStoreAddr">Gariahat Crossing, Kolkata</p>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-gold/20 text-gold border border-gold/30 uppercase" id="confStatusBadge">
+                Pending
+              </span>
+            </div>
+
+            <!-- Big ID display -->
+            <div class="py-4">
+              <p class="text-[10px] font-mono text-warm/60 uppercase tracking-wider" id="confIdLabel">Reservation ID</p>
+              <p class="text-3xl font-mono font-bold text-terracotta tracking-wider mt-0.5" id="confResId">#RES-88214</p>
+            </div>
+
+            <!-- Reserved Item details -->
+            <div class="pt-3 border-t border-warm/15 space-y-1.5">
+              <div class="flex justify-between text-xs">
+                <span class="text-warm/70" id="confItemLabel">Item</span>
+                <span class="font-medium text-warm text-right truncate max-w-[200px]" id="confItemName">Ivory Jamdani Panjabi</span>
+              </div>
+              <div class="flex justify-between text-xs">
+                <span class="text-warm/70" id="confSizeColorLabel">Size & Colour</span>
+                <span class="font-medium text-warm" id="confSizeColorVal">Size M • Ivory</span>
+              </div>
+              <div class="flex justify-between text-xs">
+                <span class="text-warm/70" id="confPriceLabel">Payable Price</span>
+                <span class="font-bold font-mono text-gold" id="confPriceVal">₹2,499</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Counter instructions disclaimer -->
+          <div class="mt-4 p-3.5 rounded-xl bg-cream border border-line text-xs text-muted leading-relaxed flex items-start gap-2.5">
+            <i data-lucide="map-pin" class="w-4 h-4 text-terracotta shrink-0 mt-0.5"></i>
+            <p id="confInstructions">
+              Ask for <strong>Bapi Da</strong> at Counter 3. Held for 2 hours. Not an advance payment or guaranteed indefinite hold.
+            </p>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="pt-6 space-y-2.5">
+          <a id="getDirectionsBtn" href="https://maps.google.com/?q=Gariahat+Market+Kolkata" target="_blank" rel="noopener" class="w-full py-3.5 px-6 rounded-xl bg-templeGreen hover:bg-templeGreenDark text-white font-semibold text-xs flex items-center justify-center gap-2 transition-colors">
+            <i data-lucide="navigation" class="w-4 h-4"></i>
+            <span id="getDirectionsText">Get Directions to Store</span>
+          </a>
+
+          <button id="findAnotherLookBtn" class="w-full py-3 px-6 rounded-xl border border-line bg-warm hover:bg-cream text-xs font-semibold text-ink transition-colors">
+            <span id="findAnotherText">Find Another Look</span>
+          </button>
+        </div>
+      </section>
+
+
+      <!-- ===================================================== -->
+      <!-- SCREEN 8: ALL PRODUCTS BROWSER (SECONDARY OPTION) -->
+      <!-- ===================================================== -->
+      <section id="screenAllProducts" class="screen-view flex-1 flex flex-col hidden animate-fadeIn">
+        <div class="flex items-center justify-between mb-4">
+          <button class="back-to-screen text-xs font-semibold text-muted flex items-center gap-1 hover:text-ink" data-target="screenLanding">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            <span class="back-text">Back</span>
+          </button>
+          <span class="text-[11px] font-mono text-muted" id="catalogCount">25 Items</span>
+        </div>
+
+        <h2 class="font-serif text-3xl text-ink font-semibold" id="browseHeading">
+          Boutique <em class="text-terracotta font-normal italic">Collection</em>
+        </h2>
+
+        <!-- Category Filter Chips -->
+        <div class="flex items-center gap-2 overflow-x-auto py-3 no-scrollbar" id="catalogCategoryChips">
+          <button class="cat-chip active px-3 py-1.5 rounded-full border border-terracotta bg-terracotta text-white text-xs font-semibold whitespace-nowrap" data-cat="all">All</button>
+          <button class="cat-chip px-3 py-1.5 rounded-full border border-line bg-cream hover:bg-creamDark text-ink text-xs font-medium whitespace-nowrap" data-cat="Sarees">Sarees</button>
+          <button class="cat-chip px-3 py-1.5 rounded-full border border-line bg-cream hover:bg-creamDark text-ink text-xs font-medium whitespace-nowrap" data-cat="Kurtas">Kurtas</button>
+          <button class="cat-chip px-3 py-1.5 rounded-full border border-line bg-cream hover:bg-creamDark text-ink text-xs font-medium whitespace-nowrap" data-cat="Kurta sets">Kurta Sets</button>
+          <button class="cat-chip px-3 py-1.5 rounded-full border border-line bg-cream hover:bg-creamDark text-ink text-xs font-medium whitespace-nowrap" data-cat="Dresses">Dresses</button>
+          <button class="cat-chip px-3 py-1.5 rounded-full border border-line bg-cream hover:bg-creamDark text-ink text-xs font-medium whitespace-nowrap" data-cat="Shirts">Shirts</button>
+        </div>
+
+        <!-- Catalog Product Grid -->
+        <div class="grid grid-cols-2 gap-3 mt-2 pb-6" id="catalogGrid">
+          <!-- Injected via JS -->
+        </div>
+      </section>
+
+
+      <!-- ===================================================== -->
+      <!-- SCREEN 9: MERCHANT DASHBOARD & MANAGEMENT -->
+      <!-- ===================================================== -->
+      <section id="screenMerchant" class="screen-view flex-1 flex flex-col hidden animate-fadeIn">
+        <!-- Merchant Header -->
+        <div class="flex items-center justify-between pb-3 border-b border-line mb-4">
+          <div>
+            <span class="text-[10px] font-mono text-terracotta font-bold uppercase tracking-wider">BOUTIQUE PORTAL</span>
+            <h2 class="font-serif text-2xl text-ink font-semibold">Staff Floor View</h2>
+          </div>
+          <button id="exitMerchantBtn" class="px-3 py-1 rounded-full border border-line bg-cream text-xs font-semibold text-muted hover:text-ink">
+            Exit Staff
+          </button>
+        </div>
+
+        <!-- Merchant Dashboard Stats Grid -->
+        <div class="grid grid-cols-2 gap-2.5 mb-5">
+          <div class="p-3 rounded-xl bg-cream border border-line">
+            <p class="text-[10px] font-mono text-muted uppercase">Pending Holds</p>
+            <p class="text-2xl font-serif font-bold text-terracotta" id="statPendingRes">0</p>
+          </div>
+          <div class="p-3 rounded-xl bg-cream border border-line">
+            <p class="text-[10px] font-mono text-muted uppercase">Confirmed</p>
+            <p class="text-2xl font-serif font-bold text-templeGreen" id="statConfirmedRes">0</p>
+          </div>
+          <div class="p-3 rounded-xl bg-cream border border-line">
+            <p class="text-[10px] font-mono text-muted uppercase">Available Items</p>
+            <p class="text-2xl font-serif font-bold text-ink" id="statAvailableProd">0</p>
+          </div>
+          <div class="p-3 rounded-xl bg-cream border border-line">
+            <p class="text-[10px] font-mono text-muted uppercase">Total Racks</p>
+            <p class="text-2xl font-serif font-bold text-ink" id="statTotalProd">0</p>
+          </div>
+        </div>
+
+        <!-- Section Switcher Tabs: Reservations vs Inventory -->
+        <div class="flex border-b border-line mb-4">
+          <button id="tabReservationsBtn" class="flex-1 py-2 text-xs font-bold border-b-2 border-terracotta text-terracotta">
+            Reservations (<span id="tabResCount">0</span>)
+          </button>
+          <button id="tabInventoryBtn" class="flex-1 py-2 text-xs font-medium border-b-2 border-transparent text-muted hover:text-ink">
+            Rack Inventory (<span id="tabInvCount">0</span>)
+          </button>
+        </div>
+
+        <!-- TAB 1: RESERVATIONS LIST -->
+        <div id="merchantReservationsPanel" class="space-y-3 pb-8">
+          <!-- Injected via JS -->
+        </div>
+
+        <!-- TAB 2: INVENTORY MANAGEMENT -->
+        <div id="merchantInventoryPanel" class="hidden space-y-4 pb-8">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-muted">Manage Products</h3>
+            <button id="openAddProductModalBtn" class="px-3 py-1.5 rounded-lg bg-templeGreen text-white text-xs font-semibold flex items-center gap-1">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              <span>Add Item</span>
+            </button>
+          </div>
+          
+          <div id="merchantProductList" class="space-y-2.5">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- TOAST NOTIFICATION POPUP -->
+    <div id="appToast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-ink text-warm px-4 py-2.5 rounded-full text-xs font-medium shadow-lg transition-all duration-300 opacity-0 pointer-events-none translate-y-2 max-w-[90vw] truncate">
+      Notification text
+    </div>
+
+  </div>
+
+  <!-- MERCHANT ADD / EDIT PRODUCT MODAL -->
+  <div id="productEditModal" class="fixed inset-0 z-50 bg-ink/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-warm border border-line rounded-2xl max-w-[420px] w-full max-h-[90vh] overflow-y-auto p-5 shadow-2xl">
+      <div class="flex items-center justify-between pb-3 border-b border-line mb-4">
+        <h3 class="font-serif text-xl font-bold text-ink" id="modalProductTitle">Add New Product</h3>
+        <button id="closeProductModalBtn" class="p-1 text-muted hover:text-ink">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="productEditForm" class="space-y-3">
+        <input type="hidden" id="editProdId">
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-muted mb-1">Product Name (EN)</label>
+          <input type="text" id="editProdName" required class="w-full px-3 py-2 text-xs rounded-lg border border-line bg-warm focus:border-terracotta outline-none">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-muted mb-1">Product Name (Bengali)</label>
+          <input type="text" id="editProdNameBn" class="w-full px-3 py-2 text-xs rounded-lg border border-line bg-warm focus:border-terracotta outline-none">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-muted mb-1">Category</label>
+            <select id="editProdCategory" class="w-full px-3 py-2 text-xs rounded-lg border border-line bg-warm focus:border-terracotta outline-none">
+              <option value="Sarees">Sarees</option>
+              <option value="Kurtas">Kurtas</option>
+              <option value="Kurta sets">Kurta sets</option>
+              <option value="Dresses">Dresses</option>
+              <option value="Shirts">Shirts</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-muted mb-1">Price (₹)</label>
+            <input type="number" id="editProdPrice" required min="100" class="w-full px-3 py-2 text-xs rounded-lg border border-line bg-warm focus:border-terracotta outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-muted mb-1">Image URL</label>
+          <input type="url" id="editProdImg" required class="w-full px-3 py-2 text-xs rounded-lg border border-line bg-warm focus:border-terracotta outline-none" value="https://images.unsplash.com/photo-1603252110481-7ba873bf42ab?auto=format&fit=crop&w=800&q=80">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-muted mb-1">Stock Quantity</label>
+            <input type="number" id="editProdStock" required min="0" value="5" class="w-full px-3 py-2 text-xs rounded-lg border border-line bg-warm focus:border-terracotta outline-none">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-muted mb-1">Availability</label>
+            <select id="editProdAvailable" class="w-full px-3 py-2 text-xs rounded-lg border border-line bg-warm focus:border-terracotta outline-none">
+              <option value="true">In Stock</option>
+              <option value="false">Out of Stock</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-muted mb-1">Sizes (comma-separated)</label>
+          <input type="text" id="editProdSizes" value="S, M, L, XL" class="w-full px-3 py-2 text-xs rounded-lg border border-line bg-warm focus:border-terracotta outline-none">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-muted mb-1">Colours (comma-separated)</label>
+          <input type="text" id="editProdColours" value="Crimson Red, Gold" class="w-full px-3 py-2 text-xs rounded-lg border border-line bg-warm focus:border-terracotta outline-none">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-muted mb-1">Description (EN)</label>
+          <textarea id="editProdDesc" rows="2" class="w-full px-3 py-2 text-xs rounded-lg border border-line bg-warm focus:border-terracotta outline-none">Handcrafted festive collection piece.</textarea>
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-muted mb-1">Description (BN)</label>
+          <textarea id="editProdDescBn" rows="2" class="w-full px-3 py-2 text-xs rounded-lg border border-line bg-warm focus:border-terracotta outline-none">উৎসবের বিশেষ কালেকশন।</textarea>
+        </div>
+
+        <div class="pt-3 flex gap-2">
+          <button type="button" id="cancelProductEditBtn" class="flex-1 py-2.5 rounded-lg border border-line bg-cream text-xs font-semibold text-muted">Cancel</button>
+          <button type="submit" class="flex-1 py-2.5 rounded-lg bg-terracotta text-white text-xs font-semibold">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Application Logic -->
+  <script src="/app.js"></script>
+</body>
+</html>
