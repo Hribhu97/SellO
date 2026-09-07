@@ -1,0 +1,56 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isShopMerchant(shopId) {
+      return isAuthenticated() && (
+        request.auth.token.shopId == shopId ||
+        exists(/databases/$(database)/documents/merchantUsers/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/merchantUsers/$(request.auth.uid)).data.shopId == shopId
+      );
+    }
+
+    // 1. Shops Collection
+    // Public can read active shops; only verified merchants can modify
+    match /shops/{shopId} {
+      allow read: if resource.data.active == true || isShopMerchant(shopId);
+      allow create, update, delete: if isShopMerchant(shopId);
+    }
+
+    // 2. Products Collection
+    // Shoppers can ONLY read available products with stock; merchants have full CRUD for their shop
+    match /products/{productId} {
+      allow read: if (resource.data.isAvailable == true && resource.data.stockQuantity > 0) ||
+                     isShopMerchant(resource.data.shopId);
+      allow create: if isShopMerchant(request.resource.data.shopId);
+      allow update, delete: if isShopMerchant(resource.data.shopId);
+    }
+
+    // 3. Reservations Collection
+    // Creation occurs via secure Cloud Function or atomic transaction.
+    // Merchants can view and update reservations for their shop.
+    match /reservations/{reservationId} {
+      allow read: if isShopMerchant(resource.data.shopId);
+      allow update: if isShopMerchant(resource.data.shopId) &&
+                       request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt']);
+      allow create, delete: if false; // Must be created via secure Cloud Function / atomic backend
+    }
+
+    // 4. Merchant Users
+    match /merchantUsers/{userId} {
+      allow read: if isAuthenticated() && request.auth.uid == userId;
+      allow write: if false; // Managed by admin/backend
+    }
+
+    // 5. Analytics Events (append only)
+    match /analyticsEvents/{eventId} {
+      allow create: if true; // Public client event tracking
+      allow read, update, delete: if false;
+    }
+  }
+}
