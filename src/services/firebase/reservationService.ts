@@ -68,11 +68,46 @@ export interface CreateReservationInput {
  * Creates an atomic in-store counter reservation with 2-hour hold.
  * Authoritative price and availability are read server-side from product document.
  */
+const isDemoMode = !db.app.options.apiKey || db.app.options.apiKey === 'demo-api-key';
+
 export async function createReservation(input: CreateReservationInput): Promise<Reservation> {
   // Validate customer phone: must be 10 digits
   const cleanPhone = input.customerPhone.replace(/\D/g, '');
   if (cleanPhone.length < 10) {
     throw new Error('Please enter a valid 10-digit mobile number.');
+  }
+
+  // Fast path for local demo mode
+  if (isDemoMode) {
+    const product = await getProductById(input.productId);
+    if (!product || !product.isAvailable || product.stockQuantity <= 0) {
+      throw new Error('Sorry, this item was just picked up by another shopper.');
+    }
+
+    const now = new Date();
+    const expiresAt = new Date(now.getTime() + 2 * 60 * 60 * 1000);
+    const reservation: Reservation = {
+      id: `RES-${Math.floor(10000 + Math.random() * 90000)}`,
+      shopId: input.shopId,
+      productId: input.productId,
+      customerName: input.customerName.trim(),
+      customerPhone: cleanPhone,
+      selectedSize: input.selectedSize,
+      selectedColour: input.selectedColour,
+      productSnapshot: {
+        name: product.name,
+        nameBn: product.nameBn,
+        price: product.price,
+        imageUrl: product.imageUrl
+      },
+      status: 'pending',
+      createdAt: now.toISOString(),
+      updatedAt: now.toISOString(),
+      expiresAt: expiresAt.toISOString()
+    };
+
+    localReservations.unshift(reservation);
+    return reservation;
   }
 
   // Try server-side Cloud Function / API first for strict atomic consistency
@@ -212,6 +247,10 @@ export async function createReservation(input: CreateReservationInput): Promise<
 }
 
 export async function getShopReservations(shopId: string): Promise<Reservation[]> {
+  if (isDemoMode) {
+    return localReservations.filter(r => r.shopId === shopId);
+  }
+
   try {
     const resRef = collection(db, 'reservations');
     const q = query(resRef, where('shopId', '==', shopId), orderBy('createdAt', 'desc'));

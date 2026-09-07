@@ -1,6 +1,24 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@theme {
+  --color-warm: #FBF9F5;
+  --color-cream: #F4EFE6;
+  --color-creamDark: #EAE2D5;
+  --color-line: #E5DDD0;
+  --color-ink: #1D211E;
+  --color-muted: #6E736A;
+  --color-terracotta: #C85A32;
+  --color-terracottaDark: #AC4823;
+  --color-templeGreen: #2A4B3C;
+  --color-templeGreenDark: #1E372B;
+  --color-gold: #C89D52;
+  --color-goldLight: #FDF7EB;
+
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "DM Mono", monospace;
+}
 
 @layer base {
   * {
